@@ -1,3 +1,4 @@
+from numpy import require
 from flask import Flask, request, send_file, jsonify
 from PIL import Image
 from base64 import encodebytes
@@ -49,7 +50,7 @@ def style_transer_encode_all():
 @app.route('/origin/blame', methods=['POST', 'GET'])
 def style_transfer_blame():
     if request.method == 'POST':
-        print('[INFO] go jere')
+        print('[INFO] go here')
         file = request.files['file']
         input_image = f'{input_image_dir}/{file.filename}'
         file.save(input_image)
@@ -64,7 +65,7 @@ def style_transfer_blame():
 @app.route('/origin/yuumei', methods=['POST', 'GET'])
 def style_transfer_yuumei():
     if request.method == 'POST':
-        print('[INFO] go jere')
+        print('[INFO] go here')
         file = request.files['file']
         input_image = f'{input_image_dir}/{file.filename}'
         file.save(input_image)
@@ -79,7 +80,7 @@ def style_transfer_yuumei():
 @app.route('/origin/candy', methods=['POST', 'GET'])
 def style_transfer_candy():
     if request.method == 'POST':
-        print('[INFO] go jere')
+        print('[INFO] go here')
         file = request.files['file']
         input_image = f'{input_image_dir}/{file.filename}'
         file.save(input_image)
@@ -94,7 +95,7 @@ def style_transfer_candy():
 @app.route('/origin/mosaic', methods=['POST', 'GET'])
 def style_transfer_mosaic():
     if request.method == 'POST':
-        print('[INFO] go jere')
+        print('[INFO] go here')
         file = request.files['file']
         input_image = f'{input_image_dir}/{file.filename}'
         file.save(input_image)
@@ -105,9 +106,38 @@ def style_transfer_mosaic():
         os.remove(input_image)
         return send_file(out_img_path)
     return 'Not defined'
-# @app.route('/tmp/a')
-# def t():
-#     return ">>>>"
+
+@app.route('/origin/rain_princess', methods=['POST', 'GET'])
+def style_transfer_rain_princess():
+    if request.method == 'POST':
+        print('[INFO] go here')
+        file = request.files['file']
+        input_image = f'{input_image_dir}/{file.filename}'
+        file.save(input_image)
+        model = dirs_model[4]
+        model_names = model.split('/')[-1]
+        out_img_path = f'{output_image_dir}/{file.filename[:-4]}_{model_names[:-4]}.png'
+        os.system(command.format(input_image, model, out_img_path))
+        os.remove(input_image)
+        return send_file(out_img_path)
+    return 'Not defined'
+
+@app.route('/origin/udnie', methods=['POST', 'GET'])
+def style_transfer_udnie():
+    if request.method == 'POST':
+        print('[INFO] go here')
+        print(request.data)
+        file = request.files['file']
+        print(request.files['file'].filename)
+        input_image = f'{input_image_dir}/{file.filename}'
+        file.save(input_image)
+        model = dirs_model[5]
+        model_names = model.split('/')[-1]
+        out_img_path = f'{output_image_dir}/{file.filename[:-4]}_{model_names[:-4]}.png'
+        os.system(command.format(input_image, model, out_img_path))
+        os.remove(input_image)
+        return send_file(out_img_path)
+    return 'Not defined'
 
 @app.route('/')
 def root():
