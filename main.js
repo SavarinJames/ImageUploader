@@ -26,30 +26,40 @@ right.addEventListener("mouseleave", () => {
   container.classList.remove("hover-right");
 });
 
+var imageFile;
+
 var loadFile = function (event) {
   var image = document.getElementById('uploadedImg');
-  image.src = URL.createObjectURL(event.target.files[0]);
+  imageFile = event.target.files[0];
+  image.src = URL.createObjectURL(imageFile);
 };
 
 async function convert() {
-  
+
+  resultImg1.src = uploadedImg.src;
+
   const formData = new FormData();
   var image = document.getElementById('uploadedImg');
 
-  formData.append('image', image);
+  formData.append('imageFile', imageFile);
 
-  fetch(serverSide + '/', {
-      method: 'GET',
-      // body: formData
+  fetch(serverSide + '/style_transfer', {
+      method: 'POST',
+      mode: "no-cors",
+      data: formData,
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
     })
     .then(response => response.json())
-    .then(result => {
-      console.log('Success:', result);
+    .then(data => {
+      console.log(data.path)
     })
     .catch(error => {
-      console.error('Error:', error);
+      console.error('Error:', response);
     });
-    console.log('Success:', result);
+
+  resultImg2.src = uploadedImg.src;
 }
 
 // Get the modal
