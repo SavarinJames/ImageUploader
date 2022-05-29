@@ -45,10 +45,13 @@ async function convert() {
 		body: formdata,
 		redirect: 'follow'
 	};
-
-	await fetch("http://127.0.0.1:5000/origin/udnie", requestOptions)
+	
+	await fetch(serverSide + "/origin/udnie", requestOptions)
 		.then(response => response.text())
-		.then(result => console.log(result))
+		.then(result => { 
+			console.log(result);
+			resultImg3.src = result;
+		})
 		.catch(error => console.log('error', error));
 
 	resultImg2.src = uploadedImg.src;

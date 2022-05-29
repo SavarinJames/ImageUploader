@@ -1,5 +1,6 @@
 from numpy import require
 from flask import Flask, request, send_file, jsonify
+from flask_cors import CORS
 from PIL import Image
 from base64 import encodebytes
 import io
@@ -8,6 +9,8 @@ import cv2
 import json
 
 app = Flask(__name__)
+CORS(app)
+
 command = 'python fast_neural_style/neural_style/neural_style.py eval --content-image {} --model {} --output-image {} --cuda 0'
 dirs_model = ['fast_neural_style/saved_models/blame.model',
               'fast_neural_style/saved_models/yuumei.model',
