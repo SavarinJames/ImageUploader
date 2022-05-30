@@ -26,7 +26,7 @@ right.addEventListener("mouseleave", () => {
 	container.classList.remove("hover-right");
 });
 
-var imageFile;
+var imageFile, imageName;
 
 var loadFile = function (event) {
 	var image = document.getElementById('uploadedImg');
@@ -45,15 +45,22 @@ async function convert() {
 		body: formdata,
 		redirect: 'follow'
 	};
-	
+
 	await fetch(serverSide + "/origin/udnie", requestOptions)
 		.then(response => response.text())
 		.then(result => { 
-			console.log(result);
-			resultImg3.src = result;
+			// var b64Result = Buffer.from(result, 'utf8').toString('base64');
+			// var b64Result = window.btoa(result);
 		})
 		.catch(error => console.log('error', error));
 
+	// await fetch(serverSide + "/origin/udnie", requestOptions)
+	// 	.then(response => response.text())
+	// 	.then(result => {
+	// 		console.log(result);
+	// 		resultImg3.src = result;
+	// 	})
+	// 	.catch(error => console.log('error', error));
 	resultImg2.src = uploadedImg.src;
 }
 

@@ -39,7 +39,7 @@ def style_transer_encode_all():
         paths= []
         for model in dirs_model[2:]:
             model_names = model.split('/')[-1]
-            out_img_path = f'{output_image_dir}/{file.filename[:-4]}_{model_names[:-4]}.png'
+            out_img_path = f'{output_image_dir}/output_{model_names[:-4]}.png'
             paths.append(out_img_path)
             os.system(command.format(input_image, model, out_img_path))  
         os.remove(input_image)
@@ -59,7 +59,7 @@ def style_transfer_blame():
         file.save(input_image)
         model = dirs_model[0]
         model_names = model.split('/')[-1]
-        out_img_path = f'{output_image_dir}/{file.filename[:-4]}_{model_names[:-4]}.png'
+        out_img_path = f'{output_image_dir}/output_{model_names[:-4]}.png'
         os.system(command.format(input_image, model, out_img_path))
         os.remove(input_image)
         return send_file(out_img_path)
@@ -74,7 +74,7 @@ def style_transfer_yuumei():
         file.save(input_image)
         model = dirs_model[1]
         model_names = model.split('/')[-1]
-        out_img_path = f'{output_image_dir}/{file.filename[:-4]}_{model_names[:-4]}.png'
+        out_img_path = f'{output_image_dir}/output_{model_names[:-4]}.png'
         os.system(command.format(input_image, model, out_img_path))
         os.remove(input_image)
         return send_file(out_img_path)
@@ -89,7 +89,7 @@ def style_transfer_candy():
         file.save(input_image)
         model = dirs_model[2]
         model_names = model.split('/')[-1]
-        out_img_path = f'{output_image_dir}/{file.filename[:-4]}_{model_names[:-4]}.png'
+        out_img_path = f'{output_image_dir}/output_{model_names[:-4]}.png'
         os.system(command.format(input_image, model, out_img_path))
         os.remove(input_image)
         return send_file(out_img_path)
@@ -104,7 +104,7 @@ def style_transfer_mosaic():
         file.save(input_image)
         model = dirs_model[3]
         model_names = model.split('/')[-1]
-        out_img_path = f'{output_image_dir}/{file.filename[:-4]}_{model_names[:-4]}.png'
+        out_img_path = f'{output_image_dir}/output_{model_names[:-4]}.png'
         os.system(command.format(input_image, model, out_img_path))
         os.remove(input_image)
         return send_file(out_img_path)
@@ -119,7 +119,7 @@ def style_transfer_rain_princess():
         file.save(input_image)
         model = dirs_model[4]
         model_names = model.split('/')[-1]
-        out_img_path = f'{output_image_dir}/{file.filename[:-4]}_{model_names[:-4]}.png'
+        out_img_path = f'{output_image_dir}/output_{model_names[:-4]}.png'
         os.system(command.format(input_image, model, out_img_path))
         os.remove(input_image)
         return send_file(out_img_path)
@@ -129,14 +129,13 @@ def style_transfer_rain_princess():
 def style_transfer_udnie():
     if request.method == 'POST':
         print('[INFO] go here')
-        print(request.data)
         file = request.files['file']
         print(request.files['file'].filename)
         input_image = f'{input_image_dir}/{file.filename}'
         file.save(input_image)
         model = dirs_model[5]
         model_names = model.split('/')[-1]
-        out_img_path = f'{output_image_dir}/{file.filename[:-4]}_{model_names[:-4]}.png'
+        out_img_path = f'{output_image_dir}/output_{model_names[:-4]}.png'
         os.system(command.format(input_image, model, out_img_path))
         os.remove(input_image)
         return send_file(out_img_path)
